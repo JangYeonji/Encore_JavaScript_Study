@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JSON stringfy와 parse</title>
+    <script>
+        user={
+            name:'admin',
+            email:'namgarambooks@naver.com',
+            phone:'032-506-3536'
+        };
+        alert(user);
+        userStr = JSON.stringify(user);   //stringify() : JSON -> String
+        alert(userStr);
+        JSON.parse(userStr,function(key,value){   //parse() : string -> JSON
+            alert(key+" "+value);
+        });
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
