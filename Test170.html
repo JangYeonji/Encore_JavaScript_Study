@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>지오 location</title>
+    <style>
+        #myCanvas{width:500px; height:400px; background-color: #ccc;}
+    </style>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDaircKLJCUCnOtCvRFB5loVBJDSXa-TQY"></script>
+    <script>
+        function myMap(){
+            var mapCanvas = document.getElementById("myCanvas");
+            var myLatlng = new google.maps.LatLng(37.498146,127.027557);
+            var mapOptions = {
+                center:myLatlng,
+                zoom:16,
+                mapTypeId:google.maps.MapTypeId.ROADMAP
+            };
+            var map = new google.maps.Map(mapCanvas, mapOptions);
+            var marker = new google.maps.Marker({
+                positions:myLatlng,
+                map: map,
+                draggable:true,   //마커 드래그 가능
+                title: '지하철 강남역에서 하차'   //마커: 도움말 풍선(마우스 오버 시)
+            });
+            var contentString = '<div style=width:100px;height:50px;">여기서 만나자</div>';
+            var infowindow = new google.maps.InfoWindow({   //말풍선 내용
+                content: contentString,
+                size:new google.maps.Size(200,100)
+            });
+            google.maps.event.addListener(marker,'click',function(){   //마커를 클릭하면 이벤트를 만들 수 있음
+                infowindow.open(map,marker);
+                if(marker.getAnimation()!=null){
+                    marker.setAnimation(null);
+                }else{
+                    marker.setAnimation(google.maps.Animation.BOUNCE);
+                }
+            });
+            marker.setMap(map);
+        }
+    </script>
+</head>
+<body onload="myMap()">
+    <div id="myCanvas"></div>
+</body>
+</html>
